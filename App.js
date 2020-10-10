@@ -4,13 +4,17 @@ import {
   View,
   Text,
 } from 'react-native';
+import { Header } from './src/components';
 
 
 const App = () => {
   return (
-    <View>
-      <Text>hackerNews</Text>
-    </View>
+    <>
+      <Header title="HackerNews" onIconPress={() => {}} />
+      <View>
+        <Text>lista...</Text>
+      </View>
+    </>
   );
 };
 
