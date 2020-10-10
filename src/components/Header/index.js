@@ -14,7 +14,7 @@ const reloadPNG = require('../../assets/images/reload.png');
 export default function Header({
   title = '',
   loading = false,
-  onIconPress = () => void{}
+  onIconPress = () => {}
 }) {
   return (
     <>

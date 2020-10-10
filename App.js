@@ -10,7 +10,10 @@ import { Header } from './src/components';
 const App = () => {
   return (
     <>
-      <Header title="HackerNews" onIconPress={() => {}} />
+      <Header
+        title="HackerNews"
+        onIconPress={() => {}}
+      />
       <View>
         <Text>lista...</Text>
       </View>
