@@ -14,7 +14,6 @@ export default function PostList({
           <ListItem
             key={index}
             post={post}
-            index={index}
           />
         ))
       )}

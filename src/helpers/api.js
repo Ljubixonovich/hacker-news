@@ -24,7 +24,10 @@ export default class Api {
       }));
 
       posts.sort(compareScore).reverse();
-      return posts;
+
+      return posts.map((p, index) => {
+        return {...p, rank: index + 1}
+      });
 
     } catch (error) {
       console.warn('err: ', error)

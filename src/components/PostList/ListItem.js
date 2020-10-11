@@ -9,7 +9,6 @@ import Colors from '../../styles/colors';
 
 export default function ListItem({
   post = {},
-  index,
 }) {
   const shortUrl = () => {
     let url = post.url || '';
@@ -23,7 +22,7 @@ export default function ListItem({
     >
       <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         {post.title && (
-          <Text>{`${index + 1}. ${post.title}`}</Text>
+          <Text>{`${post.rank}. ${post.title}`}</Text>
           )}
 
         {post.url && (
