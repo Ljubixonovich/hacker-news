@@ -7,6 +7,22 @@ import {
   Linking } from 'react-native';
 import Colors from '../../styles/colors';
 
+const getReadableTime = (timestamp) => {
+  let t1 = new Date();
+  let t2 = new Date(timestamp * 1000);
+
+  const seconds = Math.round((t1.getTime() - t2.getTime()) / 1000);
+  const minutes = Math.round(seconds / 60);
+  const hours = Math.round(minutes / 60);
+  const days = Math.round(hours / 24);
+
+  if (days <= 0) return ` Today | `;
+
+  if (days == 1) return ` ${days} day ago | `;
+
+  if (days > 1) return ` ${days} days ago | `;
+}
+
 export default function ListItem({
   post = {},
 }) {
@@ -20,32 +36,34 @@ export default function ListItem({
     <View
       style={styles.postContainer}
     >
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={styles.row}>
         {post.title && (
           <Text>{`${post.rank}. ${post.title}`}</Text>
           )}
 
         {post.url && (
           <TouchableOpacity onPress={() => Linking.openURL(post.url)}>
-            <Text style={{ color: Colors.gray }}>{` (${shortUrl()})`}</Text>
+            <Text style={styles.gray}>{` (${shortUrl()})`}</Text>
           </TouchableOpacity>
         )}
       </View>
 
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+      <View style={styles.row}>
         {post.score && (
           <Text>{post.score} points</Text>
         )}
 
         {post.by && (
           <>
-            <Text style={{ color: Colors.gray }}>{` by `}</Text>
+            <Text style={styles.gray}>{` by `}</Text>
             <Text>{post.by}</Text>
           </>
         )}
 
         {post.time && (
-          <Text style={{ color: Colors.gray }}> 2 hours ago | </Text>
+          <Text style={styles.gray}>
+            {getReadableTime(post.time)}
+          </Text>
         )}
 
         {post.kids && (
@@ -66,4 +84,9 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.lightGray,
     borderBottomWidth: 1,
   },
+  row: { 
+    flexDirection: 'row', 
+    flexWrap: 'wrap' 
+  },
+  gray: { color: Colors.gray },
 });
