@@ -2,15 +2,14 @@ import React, {
   useEffect,
   useState,
   useRef } from 'react';
-import { 
-  View,
+import {
   ScrollView,
-  StyleSheet,
-  Text } from 'react-native';
+  StyleSheet, } from 'react-native';
 import {
   Buttons,
   Header,
-  PostList, } from '../../components';
+  PostList,
+  ErrorText, } from '../../components';
 import { Api } from '../../helpers';
 
 const reduceArray = (array, index) => {
@@ -87,16 +86,16 @@ export default function News () {
   }, [posts, pageIndex, pageFlipped])
 
   prevPressHandler = () => {
-    if (pageIndex > 0) {      
+    if (pageIndex > 0) {
       setPageIndex(pageIndex - 1);
       setPageFlipped(true);
     }
   }
 
   morePressHandler = () => {
-    if (pageIndex < 10) {      
+    if (pageIndex < 10) {
       setPageIndex(pageIndex + 1);
-      setPageFlipped(true);      
+      setPageFlipped(true);
     }
   }
 
@@ -107,24 +106,21 @@ export default function News () {
         loading={loading}
         onIconPress={getStories}
       />
-      
-      <ScrollView ref={scrollRef} style={styles.container}>
+
+      <ScrollView
+        ref={scrollRef}
+        style={styles.container}
+      >
         <PostList posts={currentPagePosts} />
-        <Buttons 
-          currentPage={pageIndex + 1} 
+        <Buttons
+          currentPage={pageIndex + 1}
           disabled={posts.length === 0}
           onPrevPress={prevPressHandler}
           onMorePress={morePressHandler}
         />
       </ScrollView>
 
-      {error.length > 0 && (
-        <View style={{ backgroundColor: 'red'}}>
-          <Text style={{color: 'white'}}>
-            error: {error}
-          </Text>
-        </View>
-      )}
+      <ErrorText error={error} />
     </>
   );
 };
