@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 50,
     width: 100,
+    marginLeft: 4,
   },
   line: {
     color: Colors.gray

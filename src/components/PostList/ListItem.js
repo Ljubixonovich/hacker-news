@@ -48,9 +48,11 @@ export default function ListItem({
           <Text style={{ color: Colors.gray }}> 2 hours ago | </Text>
         )}
 
-        <Text>
-          {post.kids.length} comments
-        </Text>
+        {post.kids && (
+          <Text>
+            {post.kids.length} comments
+          </Text>
+        )}
       </View>
     </View>
   );

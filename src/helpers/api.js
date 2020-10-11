@@ -36,7 +36,6 @@ export default class Api {
   }
 
   static async getAllStoriesIds () {
-    console.log('getAllStoriesIds()');
     return new Promise((resolve, reject) => {
       fetch('https://hacker-news.firebaseio.com/v0/beststories.json')
       .then(res => res.json())
@@ -46,7 +45,6 @@ export default class Api {
   }
 
   static async getStorie (id) {
-    console.log('getStorie(id)');
     return new Promise((resolve, reject) => {
       fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)
       .then(res => res.json())
