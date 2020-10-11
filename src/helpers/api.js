@@ -1,19 +1,31 @@
+
+const compareScore = (a, b) => {
+  if (a.score < b.score) {
+    return -1;
+  }
+  if (a.score > b.score) {
+    return 1;
+  }
+  return 0;
+}
+
 export default class Api {
 
   static async getAllStories () {
     try {
+      let posts = [];
       let storyIds = await Api.getAllStoriesIds();
 
       if (storyIds.error) throw Error(storyIds.error)
 
-      let posts = [];
       await Promise.all(storyIds.map(async (id) => {
         const story = await Api.getStorie(id);
         posts.push(story);
       }));
 
-      // return posts;
-      return posts.slice(0, 20);
+      posts.sort(compareScore).reverse();
+      return posts;
+
     } catch (error) {
       console.warn('err: ', error)
       return 'err: ' + error;

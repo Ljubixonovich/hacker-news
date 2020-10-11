@@ -1,9 +1,9 @@
-import Button from './Button';
+import Buttons from './Button';
 import Header from './Header';
 import PostList from './PostList';
 
 export {
-  Button,
+  Buttons,
   Header,
   PostList,
 }

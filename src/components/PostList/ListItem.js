@@ -1,5 +1,10 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Linking } from 'react-native';
 import Colors from '../../styles/colors';
 
 export default function ListItem({
@@ -28,7 +33,7 @@ export default function ListItem({
         )}
       </View>
 
-      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>        
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
         {post.score && (
           <Text>{post.score} points</Text>
         )}
