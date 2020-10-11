@@ -32,6 +32,7 @@ export default function News () {
   const [pageIndex, setPageIndex] = useState(0);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [pageFlipped, setPageFlipped] = useState(false);
 
   const getStories = async () => {
     setLoading(true);
@@ -43,6 +44,7 @@ export default function News () {
         } else {
           setPosts(data);
           setLoading(false);
+          setError('');
         }
       })
       .catch(err => {})
@@ -62,23 +64,34 @@ export default function News () {
       })
     }
     gs();
+    let interval = setInterval(() => gs(), 30000);
+
+    return () => {
+      clearInterval(interval);
+    }
   }, [])
+
 
   // effect that set 20 posts from allPosts
   useEffect(() => {
     setCurrentPagePosts(reduceArray(posts, pageIndex));
-    setTimeout(() => scrollRef?.current && scrollRef.current.scrollTo({ x: 0, y: 0, animated: true}), 100) 
-  }, [posts, pageIndex])
+    if (pageFlipped) {
+      setTimeout(() => scrollRef?.current && scrollRef.current.scrollTo({ x: 0, y: 0, animated: true}), 100)
+      setPageFlipped(false);
+    }
+  }, [posts, pageIndex, pageFlipped])
 
   prevPressHandler = () => {
     if (pageIndex > 0) {      
       setPageIndex(pageIndex - 1);
+      setPageFlipped(true);
     }
   }
 
   morePressHandler = () => {
     if (pageIndex < 10) {      
       setPageIndex(pageIndex + 1);
+      setPageFlipped(true);      
     }
   }
 
@@ -101,7 +114,7 @@ export default function News () {
       </ScrollView>
 
       {error.length > 0 && (
-        <View style={{ backgroundColor: 'blue'}}>
+        <View style={{ backgroundColor: 'red'}}>
           <Text style={{color: 'white'}}>
             error: {error}
           </Text>
