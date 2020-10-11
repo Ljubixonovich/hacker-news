@@ -30,8 +30,7 @@ export default class Api {
       });
 
     } catch (error) {
-      console.warn('err: ', error)
-      return 'err: ' + error;
+      throw Error(error);
     }
   }
 

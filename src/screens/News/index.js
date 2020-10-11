@@ -47,7 +47,10 @@ export default function News () {
           setError('');
         }
       })
-      .catch(err => {})
+      .catch(err => {
+        setLoading(false);
+        setError(err.toString())
+      })
   }
 
   // fetch on first mount
@@ -58,9 +61,11 @@ export default function News () {
       .then(data => {
         setPosts(data);
         setLoading(false);
+        setError('');
       })
       .catch(err => {
         setLoading(false);
+        setError(err.toString())
       })
     }
     gs();
